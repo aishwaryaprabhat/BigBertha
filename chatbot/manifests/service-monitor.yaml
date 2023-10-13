@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: kube-prometheus-stack-coredns
+    app.kubernetes.io/instance: kube-prometheus-stack
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 42.0.3
+    chart: kube-prometheus-stack-42.0.3
+    heritage: Helm
+    release: kube-prometheus-stack
+  name: llmchat
+  namespace: prometheus
+spec:
+  job_name: llmchat
+  endpoints:
+  - port: metricsport
+    scheme: http
+  namespaceSelector:
+    matchNames:
+    - bigbertha
+  selector:
+    matchLabels:
+      app: llmchatbot
