@@ -2,6 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: llmchatbot
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: {{ .Values.service.metricsport }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
