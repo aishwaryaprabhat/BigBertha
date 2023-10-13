@@ -16,13 +16,12 @@ EXPOSE 8501
 EXPOSE 5000
 
 # Define environment variables with default values
-ENV HUGGINGFACEHUB_API_TOKEN=
 ENV HF_REPO=TheBloke/Llama-2-7B-chat-GGML
 ENV HF_MODEL_FILE=llama-2-7b-chat.ggmlv3.q2_K.bin
 ENV DOWNLOAD_LATER=false
 
 # Copy the necessary files into the container
-ADD scripts .
+COPY scripts scripts
 COPY entrypoint.sh .
 COPY requirements.txt .
 
@@ -34,5 +33,6 @@ RUN pip3 install -r requirements.txt
 
 USER llamauser
 
+RUN ls
 # Run the entrypoint script only if HUGGINGFACEHUB_API_TOKEN is available
 CMD ["./entrypoint.sh"]

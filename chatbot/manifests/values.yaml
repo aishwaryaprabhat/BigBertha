@@ -7,7 +7,7 @@ service:
   appport: 8501
 environment:
   DOWNLOAD_LATER: "false"
-  HUGGINGFACE_API_TOKEN: placeholder
+  HUGGINGFACEHUB_API_TOKEN: placeholder
 resources:
   cpuRequest: "1"
   cpuLimit: "4"
