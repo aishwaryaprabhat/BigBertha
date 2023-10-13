@@ -3,8 +3,8 @@ image:
   tag: v1
 replicas: 2
 service:
-  appPort: 5000
-  streamlitPort: 8501
+  metricsPort: 5000
+  appPort: 8501
 environment:
   DOWNLOAD_LATER: "false"
 resources:
