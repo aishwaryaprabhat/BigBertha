@@ -12,5 +12,5 @@ spec:
     matchNames:
       - {{ .Values.namespace }}  # Namespace where the target pods are located
   endpoints:
-    - port: {{ .Values.service.metricsport }}   # The name of the port on the target pods
+    - port: "{{ .Values.service.metricsport }}"   # The name of the port on the target pods
       path: /metrics  # The path where the metrics are exposed on the target pods
