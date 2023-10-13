@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: llmchatbot
+  labels:
+    app: llmchatbot
 spec:
   selector:
     app: llmchatbot
