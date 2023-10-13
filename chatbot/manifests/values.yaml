@@ -1,3 +1,4 @@
+namespace: bigbertha
 image:
   repository: aishwaryaprabhat/llmchatbot
   tag: v1.4
