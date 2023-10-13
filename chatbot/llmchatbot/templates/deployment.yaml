@@ -20,7 +20,7 @@ spec:
             - containerPort: {{ .Values.service.appport }}
           env:
             - name: DOWNLOAD_LATER
-              value: {{ .Values.environment.DOWNLOAD_LATER }}
+              value: "{{ .Values.environment.DOWNLOAD_LATER }}"
             - name: HUGGINGFACEHUB_API_TOKEN
               valueFrom:
                 secretKeyRef:
