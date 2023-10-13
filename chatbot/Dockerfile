@@ -22,9 +22,7 @@ ENV HF_MODEL_FILE=llama-2-7b-chat.ggmlv3.q2_K.bin
 ENV DOWNLOAD_LATER=false
 
 # Copy the necessary files into the container
-COPY app.py .
-COPY metrics_reporter.py .
-COPY download_model.py .
+ADD scripts .
 COPY entrypoint.sh .
 COPY requirements.txt .
 
@@ -37,5 +35,4 @@ RUN pip3 install -r requirements.txt
 USER llamauser
 
 # Run the entrypoint script only if HUGGINGFACEHUB_API_TOKEN is available
-RUN cat entrypoint.sh
 CMD if [ -n "$HUGGINGFACEHUB_API_TOKEN" ]; then ./entrypoint.sh; else echo "HUGGINGFACEHUB_API_TOKEN is required"; exit 1; fi

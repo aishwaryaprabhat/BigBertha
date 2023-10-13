@@ -1,0 +1,14 @@
+image:
+  repository: aishwaryaprabhat/llmchatbot
+  tag: v1
+replicas: 2
+service:
+  appPort: 5000
+  streamlitPort: 8501
+environment:
+  DOWNLOAD_LATER: "false"
+resources:
+  cpuRequest: "1"
+  cpuLimit: "4"
+  memoryRequest: "16Gi"
+  memoryLimit: "20Gi"

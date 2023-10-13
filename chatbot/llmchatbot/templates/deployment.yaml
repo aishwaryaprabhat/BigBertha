@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llmchatbot
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: llmchatbot
+  template:
+    metadata:
+      labels:
+        app: llmchatbot
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.appPort }}
+            - containerPort: {{ .Values.service.streamlitPort }}
+          env:
+            {{- toYaml .Values.environment | nindent 12 }}
+          resources:
+            requests:
+              cpu: {{ .Values.resources.cpuRequest }}
+              memory: {{ .Values.resources.memoryRequest }}
+            limits:
+              cpu: {{ .Values.resources.cpuLimit }}
+              memory: {{ .Values.resources.memoryLimit }}
