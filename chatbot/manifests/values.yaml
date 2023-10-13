@@ -1,6 +1,6 @@
 image:
   repository: aishwaryaprabhat/llmchatbot
-  tag: v1
+  tag: v1.4
 replicas: 2
 service:
   metricsport: 5000
