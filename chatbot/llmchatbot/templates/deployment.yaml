@@ -20,7 +20,7 @@ spec:
             - containerPort: {{ .Values.service.appport }}
           env:
             - name: DOWNLOAD_LATER
-              value: {{ .Values.environment.DOWNLOAD_LATER }}
+              value: "{{ .Values.environment.DOWNLOAD_LATER }}"
           resources:
             requests:
               cpu: {{ .Values.resources.cpuRequest }}
