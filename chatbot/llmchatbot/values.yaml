@@ -3,8 +3,8 @@ image:
   tag: v1
 replicas: 2
 service:
-  metricsPort: 5000
-  appPort: 8501
+  metricsport: 5000
+  appport: 8501
 environment:
   DOWNLOAD_LATER: "false"
 resources:

@@ -16,8 +16,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.service.metricsPort }}
-            - containerPort: {{ .Values.service.appPort }}
+            - containerPort: {{ .Values.service.metricsport }}
+            - containerPort: {{ .Values.service.appport }}
           env:
             - name: DOWNLOAD_LATER
               value: {{ .Values.environment.DOWNLOAD_LATER }}

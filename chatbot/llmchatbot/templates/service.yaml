@@ -7,12 +7,12 @@ spec:
   selector:
     app: llmchatbot
   ports:
-    - name: metricsPort
+    - name: metricsport
       protocol: TCP
-      port: {{ .Values.service.metricsPort }}
-      targetPort: {{ .Values.service.metricsPort }}
-    - name: appPort
+      port: {{ .Values.service.metricsport }}
+      targetPort: {{ .Values.service.metricsport }}
+    - name: appport
       protocol: TCP
-      port: {{ .Values.service.appPort }}
-      targetPort: {{ .Values.service.appPort }}
+      port: {{ .Values.service.appport }}
+      targetPort: {{ .Values.service.appport }}
   type: ClusterIP
