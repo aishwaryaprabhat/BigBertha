@@ -35,4 +35,4 @@ RUN pip3 install -r requirements.txt
 USER llamauser
 
 # Run the entrypoint script only if HUGGINGFACEHUB_API_TOKEN is available
-CMD if [ -n "$HUGGINGFACEHUB_API_TOKEN" ]; then ./entrypoint.sh; else echo "HUGGINGFACEHUB_API_TOKEN is required"; exit 1; fi
+CMD ["./entrypoint.sh"]

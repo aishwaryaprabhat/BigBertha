@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Check if HUGGINGFACEHUB_API_TOKEN is set
+if [ -z "$HUGGINGFACEHUB_API_TOKEN" ]; then
+  echo "HUGGINGFACEHUB_API_TOKEN is not set. Exiting..."
+  exit 1
+fi
+
 # Check if DOWNLOAD_LATER is set to false
 if [ "$DOWNLOAD_LATER" = "false" ]; then
   # Run the Python script and capture its output as the environment variable
