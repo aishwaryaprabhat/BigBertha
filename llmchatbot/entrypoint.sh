@@ -9,7 +9,7 @@ fi
 # Check if DOWNLOAD_LATER is set to false
 if [ "$DOWNLOAD_LATER" = "false" ]; then
   # Run the Python script and capture its output as the environment variable
-  export MODEL_LOCAL_PATH=$(python3 scripts/download_model.py)
+  export MODEL_LOCAL_PATH=$(python3 chatbot/download_model.py)
 
   # Check if MODEL_LOCAL_PATH is empty
   if [ -z "$MODEL_LOCAL_PATH" ]; then
@@ -24,6 +24,6 @@ fi
 redis-server &
 
 # Run the Streamlit app and Flask app using Gunicorn
-python3 -m gunicorn scripts/metrics_reporter:app --bind 0.0.0.0:5000 --workers 3 &
+python3 -m gunicorn chatbot.metrics_reporter:app --bind 0.0.0.0:5000 --workers 3 &
 
-python3 -m streamlit run scripts/app.py
+python3 -m streamlit run chatbot/app.py

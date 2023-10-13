@@ -6,9 +6,9 @@ r = redis.Redis(host='localhost', port=6379, db=0)
 
 @app.route('/metrics')
 def metrics():
-    thumbs_down_count = r.get('thumbs_down_count') or 0
+    thumbs_down_count = int(r.get('thumbs_down_count') or 0)
     prometheus_data = f'thumbs_down_count {thumbs_down_count}\n'
-    return Response(prometheus_data, content_type='text/plain')
+    return Response(prometheus_data)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=5000)

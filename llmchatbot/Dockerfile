@@ -21,7 +21,7 @@ ENV HF_MODEL_FILE=llama-2-7b-chat.ggmlv3.q2_K.bin
 ENV DOWNLOAD_LATER=false
 
 # Copy the necessary files into the container
-COPY scripts scripts
+COPY chatbot chatbot
 COPY entrypoint.sh .
 COPY requirements.txt .
 
