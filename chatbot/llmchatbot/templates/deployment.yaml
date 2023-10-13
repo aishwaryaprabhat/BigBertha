@@ -20,7 +20,12 @@ spec:
             - containerPort: {{ .Values.service.appport }}
           env:
             - name: DOWNLOAD_LATER
-              value: "{{ .Values.environment.DOWNLOAD_LATER }}"
+              value: {{ .Values.environment.DOWNLOAD_LATER }}
+            - name: HUGGINGFACEHUB_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: huggingface-secret
+                  key: HUGGINGFACEHUB_API_TOKEN
           resources:
             requests:
               cpu: {{ .Values.resources.cpuRequest }}
