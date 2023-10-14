@@ -8,7 +8,7 @@ from langchain.llms import CTransformers
 from llama_cpp import Llama
 
 # Connect to the local Redis server
-def redis_conn()
+def redis_conn():
     r = redis.Redis(host='localhost', port=6379, db=0)
     return r
 
@@ -39,9 +39,10 @@ if "redis" not in st.session_state.keys():
     st.session_state["redis"] = redis_conn()
 
 # Function to increment and display the thumbs-down count
-def thumbs_down(dict_message):
+def record_feedback(dict_message):
     r = st.session_state["redis"]
-    r.incr("thumbs_down_count")
+    metric = "thumbs_down_count" if dict_message['score'] == '👎' else "thumbs_up_count"
+    r.incr(metric)
     st.success("You've recorded a thumbs-down!")
 
 # Replicate Credentials
@@ -127,5 +128,5 @@ if st.session_state.messages[-1]["role"] != "assistant":
 
 streamlit_feedback(
     feedback_type="thumbs",
-    on_submit=thumbs_down
+    on_submit=record_feedback,
 )

@@ -20,19 +20,19 @@ ENV HF_REPO=TheBloke/Llama-2-7B-chat-GGML
 ENV HF_MODEL_FILE=llama-2-7b-chat.ggmlv3.q2_K.bin
 ENV DOWNLOAD_LATER=false
 
+# Install required Python packages
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
 # Copy the necessary files into the container
 COPY chatbot chatbot
 COPY entrypoint.sh .
 COPY requirements.txt .
 
-# Set execute permissions on the entrypoint script
+# Set necessary permissions and user
 RUN chmod +x entrypoint.sh
-
-# Install required Python packages
-RUN pip3 install -r requirements.txt
-
+RUN chmod -R 777 /home
 USER llamauser
 
-RUN ls
 # Run the entrypoint script only if HUGGINGFACEHUB_API_TOKEN is available
 CMD ["./entrypoint.sh"]
