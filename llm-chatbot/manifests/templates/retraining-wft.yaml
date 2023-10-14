@@ -1,0 +1,63 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: model-retraining-pipeline-template
+spec:
+  templates:
+  - name: model-retraining-pipeline
+    steps:
+    - - name: A
+        template: model-retraining
+    - - name: B
+        template: model-benchmark-gold
+        dependencies: [A]
+    - - name: C
+        template: model-benchmark-specific
+        dependencies: [A]
+    - - name: D
+        template: model-metrics-logging
+        dependencies: [B, C]
+    - - name: E
+        template: model-quality-evaluation
+        dependencies: [D]
+    - - name: F
+        template: model-logging
+        dependencies: [E]
+    - - name: G
+        template: model-deployment
+        dependencies: [F]
+
+  - name: model-retraining-pipeline
+    container:
+      image: busybox
+      command: ["echo", "Step A: Model Retraining"]
+  
+  - name: model-benchmark-gold
+    container:
+      image: busybox
+      command: ["echo", "Step B: Model Benchmarking on Gold Generic Dataset"]
+  
+  - name: model-benchmark-specific
+    container:
+      image: busybox
+      command: ["echo", "Step C: Model Benchmarking on Specific Dataset"]
+  
+  - name: model-metrics-logging
+    container:
+      image: busybox
+      command: ["echo", "Step D: Model Metrics Logging to MLflow"]
+  
+  - name: model-quality-evaluation
+    container:
+      image: busybox
+      command: ["echo", "Step E: Model Quality Evaluation Against Current Model"]
+  
+  - name: model-logging
+    container:
+      image: busybox
+      command: ["echo", "Step F: Model Logging to MLflow"]
+  
+  - name: model-deployment
+    container:
+      image: busybox
+      command: ["echo", "Step G: Model Deployment"]

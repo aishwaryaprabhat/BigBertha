@@ -1,4 +1,3 @@
-# templates/sensor.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
@@ -13,26 +12,8 @@ spec:
       eventName: {{ .eventName }}
   {{- end }}
   triggers:
-  {{- range .Values.sensor.triggers }}
     - template:
-        name: {{ .name }}
-        argoWorkflow:
-          operation: {{ .operation }}
-          source:
-            resource:
-              apiVersion: argoproj.io/v1alpha1
-              kind: Workflow
-              metadata:
-                name: {{ .workflowName }}
-                namespace: {{ .workflowNamespace }}
-          entrypoint: {{ .entrypoint }}
-          arguments:
-            parameters:
-            - name: message
-              value: {{ .message }}
-          templates:
-          - name: whalesay
-            container:
-              image: docker/whalesay:latest
-              command: ["cowsay", "{{ .message }}"]
-  {{- end }}
+        name: model-retraining-trigger
+        workflow: 
+          generateName: model-retraining-pipeline-
+          template: model-retraining-pipeline-template
