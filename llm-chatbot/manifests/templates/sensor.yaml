@@ -15,5 +15,5 @@ spec:
     - template:
         name: model-retraining-trigger
         workflow: 
-          generateName: model-retraining-pipeline-
-          template: llm-retraining-pipeline
+          generateName: {{ .Values.sensor.workflow.generateName }}
+          template: {{ .Values.sensor.workflow.template }}

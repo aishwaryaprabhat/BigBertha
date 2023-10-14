@@ -46,13 +46,11 @@ sensor:
     - name: retraining-webhook-triggered
       eventSourceName: retraining-webhook
       eventName: trigger-retraining
-  triggers:
-    - name: argo-workflow-trigger
-      operation: submit
-      workflowName: llm-retraining-workflow
-      workflowNamespace: bigbertha
-      entrypoint: whalesay
-      message: hello world
+      {{ .Values.sensor.workflow.generateName }}
+      {{ .Values.sensor.workflow.template }}
+  workflow:
+    - generateName: llm-retraining-pipeline-
+      template: llm-retraining-pipeline
 
 alertmanagerconfig:
   name: retraining-alertmanager-config
