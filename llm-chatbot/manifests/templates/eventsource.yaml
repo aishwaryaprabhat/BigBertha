@@ -7,7 +7,8 @@ spec:
     name: {{ .Values.eventsource.service.name }}
     ports: {{ toYaml .Values.eventsource.service.ports | nindent 6 }}
   webhook:
-    {{ .Values.eventsource.webhook.triggerName }}:
-      port: {{ .Values.eventsource.webhook.port }}
-      endpoint: {{ .Values.eventsource.webhook.endpoint }}
-      method: {{ .Values.eventsource.webhook.method }}
+      {{ .Values.eventsource.webhook.triggerName }}:
+        port: "12000"
+        endpoint: {{ .Values.eventsource.webhook.endpoint }}
+        method: {{ .Values.eventsource.webhook.method }}
+
