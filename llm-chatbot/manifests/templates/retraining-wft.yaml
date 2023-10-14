@@ -7,27 +7,28 @@ spec:
 
   templates:
     - name: llm-retraining-pipeline
-      steps:
-      - - name: retrain-model
-          template: model-retraining
-      - - name: benchmark-model-gold
-          template: model-benchmarking-gold-generic
-          dependencies: [retrain-model]
-      - - name: benchmark-model-specific
-          template: model-benchmarking-specific
-          dependencies: [retrain-model]
-      - - name: log-model-metrics
-          template: model-metrics-logging-mlflow
-          dependencies: [benchmark-model-gold, benchmark-model-specific]
-      - - name: evaluate-model-quality
-          template: model-quality-evaluation
-          dependencies: [log-model-metrics]
-      - - name: log-model
-          template: model-logging-mlflow
-          dependencies: [evaluate-model-quality]
-      - - name: deploy-model
-          template: model-deployment
-          dependencies: [log-model]
+      dag:
+        tasks:
+          - name: retrain-model
+            template: model-retraining
+          - name: benchmark-model-gold
+            template: model-benchmarking-gold-generic
+            dependencies: [retrain-model]
+          - name: benchmark-model-specific
+            template: model-benchmarking-specific
+            dependencies: [retrain-model]
+          - name: log-model-metrics
+            template: model-metrics-logging-mlflow
+            dependencies: [benchmark-model-gold, benchmark-model-specific]
+          - name: evaluate-model-quality
+            template: model-quality-evaluation
+            dependencies: [log-model-metrics]
+          - name: log-model
+            template: model-logging-mlflow
+            dependencies: [evaluate-model-quality]
+          - name: deploy-model
+            template: model-deployment
+            dependencies: [log-model]
 
     - name: model-retraining
       container:
