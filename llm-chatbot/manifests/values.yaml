@@ -46,8 +46,6 @@ sensor:
     - name: retraining-webhook-triggered
       eventSourceName: retraining-webhook
       eventName: trigger-retraining
-      {{ .Values.sensor.workflow.generateName }}
-      {{ .Values.sensor.workflow.template }}
   workflow:
     generateName: llm-retraining-pipeline-
     template: llm-retraining-pipeline

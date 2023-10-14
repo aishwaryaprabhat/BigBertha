@@ -2,8 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: {{ .Values.sensor.name }}
-  annotations:
-    app.kubernetes.io/instance: argo-events
 spec:
   dependencies:
   {{- range .Values.sensor.dependencies }}
