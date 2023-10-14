@@ -1,8 +1,8 @@
 namespace: bigbertha
 image:
-  repository: aishwaryaprabhat/llmchatbot
-  tag: v1.4
-replicas: 2
+  repository: aishwaryaprabhat/chatbot
+  tag: v1.5
+replicas: 1
 service:
   metricsport: 5000
   appport: 8501
@@ -12,6 +12,6 @@ environment:
 resources:
   cpuRequest: "1"
   cpuLimit: "4"
-  memoryRequest: "16Gi"
-  memoryLimit: "20Gi"
+  memoryRequest: "3Gi"
+  memoryLimit: "5Gi"
 

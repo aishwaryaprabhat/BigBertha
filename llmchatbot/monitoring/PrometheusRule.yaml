@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations:
+    prometheus-operator-validated: 'true'
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+  labels:
+    app: kube-prometheus-stack
+    app.kubernetes.io/instance: kube-prometheus-stack
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 42.0.3
+    chart: kube-prometheus-stack-42.0.3
+    heritage: Helm
+    release: kube-prometheus-stack
+  name: thumbs-down-count-rule
+  namespace: prometheus
+spec:
+  groups:
+  - name: thumbs_down_count_alert
+    rules:
+    - alert: thumbs_down_count_exceeded
+      expr: thumbs_down_count > 10
+      for: 5s
+      annotations:
+        summary: Thumbs down count exceeded 10
+        description: The thumbs down count metric has exceeded 10.
+    - alert: thumbs_down_count_exceeded
+      expr: thumbs_down_count > 2
+      for: 5s
+      annotations:
+        summary: Model retraining required
+        description: Model retraining required
+      actions:
+      - webhook:
+          url: http://model-retraining-sensor.bigbertha.svc.cluster.local/
+          method: POST
+          headers:
+            Content-Type: application/json
+          body: |
+            {
+              "alertname": "{{ alertname }}",
+              "description": "{{ description }}",
+              "summary": "{{ summary }}",
+              "severity": "{{ severity }}",
+              "status": "{{ status }}",
+              "startsAt": "{{ startsAt }}",
+              "endsAt": "{{ endsAt }}"
+            }
