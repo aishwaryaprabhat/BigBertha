@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 metadata:
   name: retraining-webhook
+  namespace: argo-events
 spec:
   service:
     name: retraining-webhook
@@ -18,6 +19,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: retraining-sensor
+  namespace: argo-events
 spec:
   dependencies:
   - name: retraining-webhook-triggered

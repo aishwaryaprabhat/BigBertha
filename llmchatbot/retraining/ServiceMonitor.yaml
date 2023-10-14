@@ -10,10 +10,11 @@ metadata:
     chart: kube-prometheus-stack-42.0.3
     heritage: Helm
     release: kube-prometheus-stack
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
   name: llmchat
   namespace: prometheus
 spec:
-  job_name: llmchat
   endpoints:
   - port: metricsport
     scheme: http

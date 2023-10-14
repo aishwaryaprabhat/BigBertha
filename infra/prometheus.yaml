@@ -1,0 +1,20 @@
+project: default
+source:
+  repoURL: 'https://prometheus-community.github.io/helm-charts'
+  targetRevision: 42.0.3
+  helm:
+    values: |-
+      prometheus-node-exporter:
+        hostRootFsMount:
+          enabled: false
+      prometheusOperator:
+        admissionWebhooks:
+          failurePolicy: Ignore
+  chart: kube-prometheus-stack
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: prometheus
+syncPolicy:
+  syncOptions:
+    - ServerSideApply=true
+    - CreateNamespace=true
