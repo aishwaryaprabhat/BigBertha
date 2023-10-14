@@ -27,7 +27,7 @@ spec:
         template: model-deployment
         dependencies: [F]
 
-  - name: model-retraining-pipeline
+  - name: model-retraining
     container:
       image: busybox
       command: ["echo", "Step A: Model Retraining"]
