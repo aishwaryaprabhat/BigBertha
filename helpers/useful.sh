@@ -14,6 +14,6 @@ kubectl -n bigbertha port-forward svc/llmchatbot 8501 5000 &
 
 # Wait for all port forwarding processes to finish before exiting
 wait
-# kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
-SECRET=$(kubectl get sa argowf-argo-workflows-server -o=jsonpath='{.secrets[0].name}'  -n argowf) 
-ARGO_TOKEN="Bearer $(kubectl get secret $SECRET -o=jsonpath='{.data.token}' -n argowf | base64 --decode)"
+# # kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+# SECRET=$(kubectl get sa argowf-argo-workflows-server -o=jsonpath='{.secrets[0].name}'  -n argowf) 
+# ARGO_TOKEN="Bearer $(kubectl get secret $SECRET -o=jsonpath='{.data.token}' -n argowf | base64 --decode)"

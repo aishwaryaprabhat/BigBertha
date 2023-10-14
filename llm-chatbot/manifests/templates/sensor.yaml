@@ -4,14 +4,21 @@ metadata:
   name: {{ .Values.sensor.name }}
 spec:
   dependencies:
-  {{- range .Values.sensor.dependencies }}
-    - name: {{ .name }}
+
+    - name: {{ .Values.eventsource.name }}
       eventSourceName: {{ .eventSourceName }}
       eventName: {{ .eventName }}
   {{- end }}
   triggers:
     - template:
         name: model-retraining-trigger
-        workflow: 
-          generateName: {{ .Values.sensor.workflow.generateName }}
-          template: {{ .Values.sensor.workflow.template }}
+        argoWorkflow:
+          source:
+            resource:
+              apiVersion: argoproj.io/v1alpha1
+              kind: Workflow
+              metadata:
+                generateName: {{ .Values.sensor.workflow.generateName }}
+              spec:
+                workflowTemplateRef:
+                  name: {{ .Values.sensor.workflow.template }}
