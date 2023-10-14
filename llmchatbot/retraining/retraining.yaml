@@ -3,6 +3,8 @@ kind: EventSource
 metadata:
   name: retraining-webhook
   namespace: argo-events
+  annotations:
+    app.kubernetes.io/instance: argo-events
 spec:
   service:
     name: retraining-webhook
@@ -13,13 +15,15 @@ spec:
     trigger-retraining:
       port: "12000"
       endpoint: /retraining
-      method: POST
+      method: GET
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: retraining-sensor
   namespace: argo-events
+  annotations:
+    app.kubernetes.io/instance: argo-events
 spec:
   dependencies:
   - name: retraining-webhook-triggered
@@ -41,7 +45,6 @@ spec:
               generateName: payload-
               labels:
                 app: payload
-              namespace: bigbertha
             spec:
               containers:
               - name: hello

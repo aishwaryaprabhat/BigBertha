@@ -25,7 +25,3 @@ spec:
       annotations:
         summary: Model retraining required
         description: Model retraining required
-        alert.receivers:
-          - name: HTTP Receiver
-            type: http
-            url: "http://retraining-webhook-eventsource-svc.bigbertha.svc"

@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: retraining-alertmanager-confgig
+  annotations:
+    prometheus-operator-validated: 'true'
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+  labels:
+    app: kube-prometheus-stack
+    app.kubernetes.io/instance: kube-prometheus-stack
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 42.0.3
+    chart: kube-prometheus-stack-42.0.3
+    heritage: Helm
+    release: kube-prometheus-stack
+    isAlertConfig: "true"
+spec:
+  receivers:
+  - name: 'webhook-receiver'
+    webhookConfigs:
+      - url: 'http://retraining-webhook-eventsource-svc.bigbertha.svc/retraining'
+  # - name: 'email-notifier'
+  #   emailConfigs:
+  #     - to: 'your.email@example.com'
+  #       from: 'alertmanager@example.com'
+  #       smarthost: 'smtp.example.com:25'
+  #       authUsername: 'alertmanager'
+  #       authPassword: 'your_password'
+  #       authIdentity: 'alertmanager@example.com'
+
+  route:
+    routes:
+      - match:
+          alertname: thumbs_down_count_exceeded
+        receiver: 'webhook-receiver'
