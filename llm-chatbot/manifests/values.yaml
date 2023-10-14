@@ -49,8 +49,8 @@ sensor:
       {{ .Values.sensor.workflow.generateName }}
       {{ .Values.sensor.workflow.template }}
   workflow:
-    - generateName: llm-retraining-pipeline-
-      template: llm-retraining-pipeline
+    generateName: llm-retraining-pipeline-
+    template: llm-retraining-pipeline
 
 alertmanagerconfig:
   name: retraining-alertmanager-config
