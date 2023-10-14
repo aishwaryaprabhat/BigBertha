@@ -7,20 +7,9 @@ spec:
   service:
     name: {{ .Values.eventsource.service.name }}
     ports:
-      - port: 12000
-        targetPort: 12000
+      {{ toYaml .Values.eventsource.service.ports | nindent 10 }}
   webhook:
-    trigger-retraining:
-      port: "12000"
-      endpoint: /retraining
-      method: GET
-# spec:
-#   service:
-#     name: {{ .Values.eventsource.service.name }}
-#     ports:
-#       {{ toYaml .Values.eventsource.service.ports | nindent 10 }}
-#   webhook:
-#     {{ .Values.eventsource.webhook.triggerName }}:
-#       port: {{ .Values.eventsource.webhook.port }}
-#       endpoint: {{ .Values.eventsource.webhook.endpoint }}
-#       method: {{ .Values.eventsource.webhook.method }}
+    {{ .Values.eventsource.webhook.triggerName }}:
+      port: {{ .Values.eventsource.webhook.port }}
+      endpoint: {{ .Values.eventsource.webhook.endpoint }}
+      method: {{ .Values.eventsource.webhook.method }}
