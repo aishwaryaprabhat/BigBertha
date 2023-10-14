@@ -25,7 +25,7 @@ spec:
             dependencies: [log-model-metrics]
           - name: log-model
             template: model-logging-mlflow
-            dependencies: [evaluate-model-quality]
+            dependencies: [log-model-metrics]
           - name: deploy-model
             template: model-deployment
             dependencies: [log-model]
