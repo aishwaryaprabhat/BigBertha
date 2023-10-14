@@ -25,19 +25,14 @@ spec:
               metadata:
                 name: {{ .workflowName }}
                 namespace: {{ .workflowNamespace }}
-              spec:
-                entrypoint: {{ .entrypoint }}
-                arguments:
-                  parameters:
-                    - name: message
-                      value: {{ .message }}
-                templates:
-                  - name: whalesay
-                    inputs:
-                      parameters:
-                        - name: message
-                    container:
-                      image: docker/whalesay:latest
-                      command: [cowsay]
-                      args: ["{{inputs.parameters.message}}"]
+          entrypoint: {{ .entrypoint }}
+          arguments:
+            parameters:
+            - name: message
+              value: {{ .message }}
+          templates:
+          - name: whalesay
+            container:
+              image: docker/whalesay:latest
+              command: ["cowsay", "{{ .message }}"]
   {{- end }}
