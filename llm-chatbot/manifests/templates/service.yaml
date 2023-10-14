@@ -10,10 +10,10 @@ spec:
   ports:
     - name: metricsport
       protocol: TCP
-      port: {{ .Values.service.metricsport }}
-      targetPort: {{ .Values.service.metricsport }}
+      port: {{ .Values.chatbotapp.service.metricsport }}
+      targetPort: {{ .Values.chatbotapp.service.metricsport }}
     - name: appport
       protocol: TCP
-      port: {{ .Values.service.appport }}
-      targetPort: {{ .Values.service.appport }}
+      port: {{ .Values.chatbotapp.service.appport }}
+      targetPort: {{ .Values.chatbotapp.service.appport }}
   type: ClusterIP
