@@ -22,5 +22,4 @@ spec:
                 generateName: {{ .Values.sensor.workflow.generateName }}
               spec:
                 workflowTemplateRef:
-                  kind: WorkflowTemplate
                   name: {{ .Values.sensor.workflow.template }}

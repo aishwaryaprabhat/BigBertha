@@ -26,7 +26,6 @@ eventbus:
 
 eventsource:
   name: retraining-webhook
-  namespace: argo-events
   service:
     name: retraining-webhook
     ports:
