@@ -1,0 +1,17 @@
+# templates/alertmanager-config.yaml
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: {{ .Values.alertmanagerconfig.name }}
+  labels:
+    isAlertConfig: "true"
+spec:
+  receivers:
+  - name: '{{ .Values.alertmanagerconfig.receiverName }}'
+    webhookConfigs:
+      - url: '{{ .Values.alertmanagerconfig.receiverURL }}'
+  route:
+    routes:
+      - match:
+          alertname: {{ .Values.alertmanagerconfig.routeMatchAlertname }}
+        receiver: '{{ .Values.alertmanagerconfig.receiverName }}'

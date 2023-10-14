@@ -125,7 +125,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
     st.session_state.messages.append(message)
 
 
-feedback = streamlit_feedback(
+streamlit_feedback(
     feedback_type="thumbs",
     on_submit=thumbs_down
 )

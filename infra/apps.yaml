@@ -12,12 +12,25 @@ spec:
     chart: kube-prometheus-stack
     helm:
       values: |-
+        prometheus:
+          prometheusSpec:
+            ruleSelector:
+              matchLabels:
+                isPrometheusRule: "true"
+            serviceMonitorSelector:
+              matchLabels:
+                isServiceMonitor: "true"
         prometheus-node-exporter:
-           hostRootFsMount:
-             enabled: false
+          hostRootFsMount:
+            enabled: false
         prometheusOperator:
-           admissionWebhooks:
-             failurePolicy: Ignore
+          admissionWebhooks:
+            failurePolicy: Ignore
+        alertmanager:
+          alertmanagerSpec:
+            alertmanagerConfigSelector:
+              matchLabels:
+                isAlertConfig: "true"
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 42.0.3
   syncPolicy:

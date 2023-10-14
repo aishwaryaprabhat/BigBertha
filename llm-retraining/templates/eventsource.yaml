@@ -1,0 +1,15 @@
+# templates/event-source.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: {{ .Values.eventsource.name }}
+spec:
+  service:
+    name: {{ .Values.eventsource.service.name }}
+    ports:
+      {{- toYaml .Values.eventsource.service.ports | nindent 10 }}
+  webhook:
+    {{ .Values.eventsource.webhook.triggerName }}:
+      port: {{ .Values.eventsource.webhook.port }}
+      endpoint: {{ .Values.eventsource.webhook.endpoint }}
+      method: {{ .Values.eventsource.webhook.method }}

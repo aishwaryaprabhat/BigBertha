@@ -1,0 +1,17 @@
+# templates/prometheus-rule.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    isPrometheusRule: "true"
+  name: {{ .Values.prometheusrule.name }}
+spec:
+  groups:
+  - name: thumbs-down-count-alert
+    rules:
+    - alert: {{ .Values.prometheusrule.alertName }}
+      expr: {{ .Values.prometheusrule.alertExpression }}
+      for: {{ .Values.prometheusrule.alertFor }}
+      annotations:
+        summary: {{ .Values.prometheusrule.alertSummary }}
+        description: {{ .Values.prometheusrule.alertDescription }}

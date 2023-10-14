@@ -1,0 +1,43 @@
+# templates/sensor.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: {{ .Values.sensor.name }}
+  annotations:
+    app.kubernetes.io/instance: argo-events
+spec:
+  dependencies:
+  {{- range .Values.sensor.dependencies }}
+    - name: {{ .name }}
+      eventSourceName: {{ .eventSourceName }}
+      eventName: {{ .eventName }}
+  {{- end }}
+  triggers:
+  {{- range .Values.sensor.triggers }}
+    - template:
+        name: {{ .name }}
+        argoWorkflow:
+          operation: {{ .operation }}
+          source:
+            resource:
+              apiVersion: argoproj.io/v1alpha1
+              kind: Workflow
+              metadata:
+                name: {{ .workflowName }}
+                namespace: {{ .workflowNamespace }}
+              spec:
+                entrypoint: {{ .entrypoint }}
+                arguments:
+                  parameters:
+                    - name: message
+                      value: {{ .message }}
+                templates:
+                  - name: whalesay
+                    inputs:
+                      parameters:
+                        - name: message
+                    container:
+                      image: docker/whalesay:latest
+                      command: [cowsay]
+                      args: ["{{inputs.parameters.message}}"]
+  {{- end }}

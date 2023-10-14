@@ -1,0 +1,19 @@
+# templates/service-monitor.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    isServiceMonitor: "true"
+  name: {{ .Release.Name }}-servicemonitor
+spec:
+  endpoints:
+  - port: metricsport
+    scheme: http
+  namespaceSelector:
+    matchNames:
+    - {{ .Values.servicemonitor.targetNamespace }}
+  selector:
+    matchLabels:
+      {{- with .Values.servicemonitor.selectorLabels }}
+      {{ toYaml . | nindent 8 }}
+      {{- end }}
