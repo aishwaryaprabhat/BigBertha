@@ -13,23 +13,9 @@ eventsource:
         targetPort: 12000
   webhook:
     triggerName: trigger-retraining
-    port: 12000
+    port: "12000"
     endpoint: /retraining
     method: GET
-
-alertmanagerconfig:
-  name: retraining-alertmanager-config
-  receiverName: webhook-receiver
-  receiverURL: http://10.96.12.253:12000/retraining
-  routeMatchAlertname: thumbs_down_count_exceeded
-
-prometheusrule:
-  name: thumbs-down-count-rule
-  alertName: thumbs_down_count_exceeded
-  alertExpression: thumbs_down_count > 2
-  alertFor: 5s
-  alertSummary: Model retraining required
-  alertDescription: Model retraining required
 
 sensor:
   name: retraining-sensor
@@ -45,6 +31,20 @@ sensor:
       workflowNamespace: bigbertha
       entrypoint: whalesay
       message: hello world
+
+alertmanagerconfig:
+  name: retraining-alertmanager-config
+  receiverName: webhook-receiver
+  receiverURL: http://10.96.12.253:12000/retraining
+  routeMatchAlertname: thumbs_down_count_exceeded
+
+prometheusrule:
+  name: thumbs-down-count-rule
+  alertName: thumbs_down_count_exceeded
+  alertExpression: thumbs_down_count > 2
+  alertFor: 5s
+  alertSummary: Model retraining required
+  alertDescription: Model retraining required
 
 
 
