@@ -34,7 +34,7 @@ eventsource:
         targetPort: 12000
   webhook:
     triggerName: trigger-retraining
-    port: 12000
+    port: "12000"
     endpoint: /retraining
     method: GET
 
