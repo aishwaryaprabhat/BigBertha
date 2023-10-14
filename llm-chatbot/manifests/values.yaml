@@ -29,13 +29,15 @@ eventsource:
   namespace: argo-events
   service:
     name: retraining-webhook
-    port: 12000
-    targetPort: 12000
+    ports:
+      - port: 12000
+        targetPort: 12000
   webhook:
     triggerName: trigger-retraining
     port: 12000
     endpoint: /retraining
     method: GET
+
 
 sensor:
   name: retraining-sensor
