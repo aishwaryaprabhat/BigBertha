@@ -24,7 +24,6 @@ spec:
           dependencies: [D]
       - - name: F
           template: model-logging-mlflow
-          when: "{{eq .status.outputs.results.E "true"}}"
           dependencies: [E]
       - - name: G
           template: model-deployment
