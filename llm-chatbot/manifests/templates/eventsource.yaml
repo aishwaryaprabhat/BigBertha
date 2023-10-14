@@ -8,7 +8,7 @@ spec:
     ports: {{ toYaml .Values.eventsource.service.ports | nindent 6 }}
   webhook:
       {{ .Values.eventsource.webhook.triggerName }}:
-        port:  {{ .Values.eventsource.webhook.port }}
+        port:  "12000" # weird it can't pick up from values.yaml
         endpoint: {{ .Values.eventsource.webhook.endpoint }}
         method: {{ .Values.eventsource.webhook.method }}
 
