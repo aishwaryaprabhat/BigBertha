@@ -28,7 +28,7 @@ spec:
             dependencies: [log-model-metrics]
           - name: deploy-model
             template: model-deployment
-            dependencies: [log-model]
+            dependencies: [log-model, evaluate-model-quality]
 
     - name: model-retraining
       container:
