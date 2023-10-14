@@ -5,7 +5,7 @@ metadata:
   name: {{ .Values.eventsource.name }}
 spec:
   service:
-    name: retraining-webhook
+    name: {{ .Values.eventsource.service.name }}
     ports:
       - port: 12000
         targetPort: 12000
