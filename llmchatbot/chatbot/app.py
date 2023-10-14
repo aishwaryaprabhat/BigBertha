@@ -8,7 +8,9 @@ from langchain.llms import CTransformers
 from llama_cpp import Llama
 
 # Connect to the local Redis server
-r = redis.Redis(host='localhost', port=6379, db=0)
+def redis_conn()
+    r = redis.Redis(host='localhost', port=6379, db=0)
+    return r
 
 
 def load_llm():
@@ -33,9 +35,12 @@ def load_llm():
 if "llm" not in st.session_state.keys():
     st.session_state["llm"] = load_llm()
 
+if "redis" not in st.session_state.keys():
+    st.session_state["redis"] = redis_conn()
 
 # Function to increment and display the thumbs-down count
 def thumbs_down(dict_message):
+    r = st.session_state["redis"]
     r.incr("thumbs_down_count")
     st.success("You've recorded a thumbs-down!")
 

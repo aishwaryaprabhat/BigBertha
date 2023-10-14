@@ -17,33 +17,15 @@ metadata:
   namespace: prometheus
 spec:
   groups:
-  - name: thumbs_down_count_alert
+  - name: thumbs-down-count-alert
     rules:
-    - alert: thumbs_down_count_exceeded
-      expr: thumbs_down_count > 10
-      for: 5s
-      annotations:
-        summary: Thumbs down count exceeded 10
-        description: The thumbs down count metric has exceeded 10.
     - alert: thumbs_down_count_exceeded
       expr: thumbs_down_count > 2
       for: 5s
       annotations:
         summary: Model retraining required
         description: Model retraining required
-      actions:
-      - webhook:
-          url: http://model-retraining-sensor.bigbertha.svc.cluster.local/
-          method: POST
-          headers:
-            Content-Type: application/json
-          body: |
-            {
-              "alertname": "{{ alertname }}",
-              "description": "{{ description }}",
-              "summary": "{{ summary }}",
-              "severity": "{{ severity }}",
-              "status": "{{ status }}",
-              "startsAt": "{{ startsAt }}",
-              "endsAt": "{{ endsAt }}"
-            }
+        alert.receivers:
+          - name: HTTP Receiver
+            type: http
+            url: "http://retraining-webhook-eventsource-svc.bigbertha.svc"
