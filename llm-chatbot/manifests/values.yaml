@@ -1,17 +1,73 @@
-namespace: bigbertha
-image:
-  repository: aishwaryaprabhat/chatbot
-  tag: v1.5
-replicas: 1
-service:
-  metricsport: 5000
-  appport: 8501
-environment:
-  DOWNLOAD_LATER: "false"
-  HUGGINGFACEHUB_API_TOKEN: placeholder
-resources:
-  cpuRequest: "1"
-  cpuLimit: "4"
-  memoryRequest: "3Gi"
-  memoryLimit: "5Gi"
+chatbotapp:
+  namespace: bigbertha
+  image:
+    repository: aishwaryaprabhat/chatbot
+    tag: v1.5
+  replicas: 1
+  service:
+    metricsport: 5000
+    appport: 8501
+  environment:
+    DOWNLOAD_LATER: "false"
+    HUGGINGFACEHUB_API_TOKEN: placeholder
+  resources:
+    cpuRequest: "1"
+    cpuLimit: "4"
+    memoryRequest: "3Gi"
+    memoryLimit: "5Gi"
+
+servicemonitor:
+  targetNamespace: bigbertha
+  selectorLabels:
+    app: llmchatbot
+
+eventbus:
+  namespace: bigbertha
+
+eventsource:
+  name: retraining-webhook
+  namespace: argo-events
+  service:
+    name: retraining-webhook
+    ports:
+      - port: "12000"
+        targetPort: "12000"
+  webhook:
+    triggerName: trigger-retraining
+    port: "12000"
+    endpoint: /retraining
+    method: GET
+
+sensor:
+  name: retraining-sensor
+  namespace: argo-events
+  dependencies:
+    - name: retraining-webhook-triggered
+      eventSourceName: retraining-webhook
+      eventName: trigger-retraining
+  triggers:
+    - name: argo-workflow-trigger
+      operation: submit
+      workflowName: llm-retraining-workflow
+      workflowNamespace: bigbertha
+      entrypoint: whalesay
+      message: hello world
+
+alertmanagerconfig:
+  name: retraining-alertmanager-config
+  receiverName: webhook-receiver
+  receiverURL: http://10.96.12.253:12000/retraining
+  routeMatchAlertname: thumbs_down_count_exceeded
+
+prometheusrule:
+  name: thumbs-down-count-rule
+  alertName: thumbs_down_count_exceeded
+  alertExpression: thumbs_down_count > 2
+  alertFor: 5s
+  alertSummary: Model retraining required
+  alertDescription: Model retraining required
+
+
+
+
 

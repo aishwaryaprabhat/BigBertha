@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: llmchatbot
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .Values.chatbotapp.replicas }}
   selector:
     matchLabels:
       app: llmchatbot
@@ -14,19 +14,19 @@ spec:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: /metrics
-        prometheus.io/port: "{{ .Values.service.metricsport }}"
+        prometheus.io/port: "{{ .Values.chatbotapp.service.metricsport }}"
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.chatbotapp.image.repository }}:{{ .Values.chatbotapp.image.tag }}"
           ports:
             - name: metricsport
-              containerPort: {{ .Values.service.metricsport }}
+              containerPort: {{ .Values.chatbotapp.service.metricsport }}
             - name: appport
-              containerPort: {{ .Values.service.appport }}
+              containerPort: {{ .Values.chatbotapp.service.appport }}
           env:
             - name: DOWNLOAD_LATER
-              value: "{{ .Values.environment.DOWNLOAD_LATER }}"
+              value: "{{ .Values.chatbotapp.environment.DOWNLOAD_LATER }}"
             - name: HUGGINGFACEHUB_API_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -34,8 +34,8 @@ spec:
                   key: HUGGINGFACEHUB_API_TOKEN
           resources:
             requests:
-              cpu: {{ .Values.resources.cpuRequest }}
-              memory: {{ .Values.resources.memoryRequest }}
+              cpu: {{ .Values.chatbotapp.resources.cpuRequest }}
+              memory: {{ .Values.chatbotapp.resources.memoryRequest }}
             limits:
-              cpu: {{ .Values.resources.cpuLimit }}
-              memory: {{ .Values.resources.memoryLimit }}
+              cpu: {{ .Values.chatbotapp.resources.cpuLimit }}
+              memory: {{ .Values.chatbotapp.resources.memoryLimit }}
