@@ -1,29 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: model-retraining-pipeline-template
+  name: llm-retraining-pipeline
 spec:
-  entrypoint: model-retraining-pipeline
+  entrypoint: llm-retraining-pipeline
 
   templates:
-    - name: model-retraining-pipeline
+    - name: llm-retraining-pipeline
       steps:
       - - name: A
           template: model-retraining
       - - name: B
-          template: model-benchmark-gold
+          template: model-benchmarking-gold-generic
           dependencies: [A]
       - - name: C
-          template: model-benchmark-specific
+          template: model-benchmarking-specific
           dependencies: [A]
       - - name: D
-          template: model-metrics-logging
+          template: model-metrics-logging-mlflow
           dependencies: [B, C]
       - - name: E
           template: model-quality-evaluation
           dependencies: [D]
       - - name: F
-          template: model-logging
+          template: model-logging-mlflow
+          when: "{{eq .status.outputs.results.E "true"}}"
           dependencies: [E]
       - - name: G
           template: model-deployment
@@ -33,32 +34,32 @@ spec:
       container:
         image: busybox
         command: ["echo", "Step A: Model Retraining"]
-        
-    - name: model-benchmark-gold
+
+    - name: model-benchmarking-gold-generic
       container:
         image: busybox
         command: ["echo", "Step B: Model Benchmarking on Gold Generic Dataset"]
-        
-    - name: model-benchmark-specific
+
+    - name: model-benchmarking-specific
       container:
         image: busybox
         command: ["echo", "Step C: Model Benchmarking on Specific Dataset"]
-        
-    - name: model-metrics-logging
+
+    - name: model-metrics-logging-mlflow
       container:
         image: busybox
         command: ["echo", "Step D: Model Metrics Logging to MLflow"]
-        
+
     - name: model-quality-evaluation
       container:
         image: busybox
         command: ["echo", "Step E: Model Quality Evaluation Against Current Model"]
-        
-    - name: model-logging
+
+    - name: model-logging-mlflow
       container:
         image: busybox
         command: ["echo", "Step F: Model Logging to MLflow"]
-        
+
     - name: model-deployment
       container:
         image: busybox

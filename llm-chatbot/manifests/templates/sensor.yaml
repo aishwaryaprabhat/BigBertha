@@ -16,4 +16,4 @@ spec:
         name: model-retraining-trigger
         workflow: 
           generateName: model-retraining-pipeline-
-          template: model-retraining-pipeline-template
+          template: llm-retraining-pipeline
