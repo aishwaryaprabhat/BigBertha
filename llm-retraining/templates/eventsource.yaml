@@ -7,7 +7,7 @@ spec:
   service:
     name: {{ .Values.eventsource.service.name }}
     ports:
-      "{{- toYaml .Values.eventsource.service.ports | nindent 10 }}"
+      {{- toYaml .Values.eventsource.service.ports | nindent 10 }}
   webhook:
     {{ .Values.eventsource.webhook.triggerName }}:
       port: {{ .Values.eventsource.webhook.port }}

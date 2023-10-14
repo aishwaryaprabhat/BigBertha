@@ -9,8 +9,8 @@ eventsource:
   service:
     name: retraining-webhook
     ports:
-      - port: 12000
-        targetPort: 12000
+      - port: "12000"
+        targetPort: "12000"
   webhook:
     triggerName: trigger-retraining
     port: "12000"
