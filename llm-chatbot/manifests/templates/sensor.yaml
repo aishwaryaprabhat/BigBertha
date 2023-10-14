@@ -12,7 +12,7 @@ spec:
   triggers:
   - template:
       name: model-retraining-trigger
-      workflow:
+      argoworkflow:
         source:
           resource:
             apiVersion: argoproj.io/v1alpha1
