@@ -35,7 +35,7 @@ eventsource:
     triggerName: trigger-retraining
     port: "12000"
     endpoint: /retraining
-    method: GET
+    method: POST
 
 
 sensor:
