@@ -12,7 +12,9 @@ spec:
       - url: '{{ .Values.alertmanagerconfig.receiverURL }}'
 
   route:
-    routes:
-      - match:
-          alertname: {{ .Values.alertmanagerconfig.routeMatchAlertname }}
-        receiver: '{{ .Values.alertmanagerconfig.receiverName }}'
+    groupBy: ['job']
+    groupWait: 5s
+    groupInterval: 5m
+    repeatInterval: 30s
+    receiver: 'webhook'
+    receiver: '{{ .Values.alertmanagerconfig.receiverName }}'
