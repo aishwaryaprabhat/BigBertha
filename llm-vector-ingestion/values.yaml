@@ -1,7 +1,7 @@
 minio:
   secretName: minio-secret
-  eventSourceName: file-upload
-  eventName: file-upload
+  eventSourceName: fileUpload
+  eventName: fileUpload
   bucket: ingestion
   endpoint: http://milvus-minio.milvus.svc:9001
   events:
