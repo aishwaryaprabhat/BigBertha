@@ -35,7 +35,6 @@ spec:
                       command:
                         - cowsay
                       image: docker/whalesay:latest
-                      args: ["{{inputs.parameters.message}}"]
           # The container args from the workflow are overridden by the s3 notification key
           parameters:
             - src:
