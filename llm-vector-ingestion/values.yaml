@@ -10,11 +10,11 @@ minio:
   insecure: true
   accessKey:
     key: accesskey
-    name: artifacts-minio
+    name: minio-secret
     value: placeholder
   secretKey:
     key: secretkey
-    name: artifacts-minio
+    name: minio-secret
     value: placeholder
 
 sensor:
