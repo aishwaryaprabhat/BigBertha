@@ -10,8 +10,7 @@ spec:
   - name: '{{ .Values.alertmanagerconfig.receiverName }}'
     webhookConfigs:
       - url: '{{ .Values.alertmanagerconfig.receiverURL }}'
-        httpConfig:
-          method: GET  # Set the HTTP method to GET
+
   route:
     routes:
       - match:
