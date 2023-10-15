@@ -1,14 +1,37 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Sensor
+# metadata:
+#   name: {{ .Values.sensor.name }}
+# spec:
+#   dependencies:
+#   {{- range .Values.sensor.dependencies }}
+#     - name: {{ .name }}
+#       eventSourceName: {{ .eventSourceName }}
+#       eventName: {{ .eventName }}
+#   {{- end }}
+#   triggers:
+#     - template:
+#         name: {{ .Values.sensor.templateName }}
+#         argoWorkflow:
+#           operation: submit
+#           source:
+#             resource:
+#               apiVersion: argoproj.io/v1alpha1
+#               kind: Workflow
+#               metadata:
+#                 generateName: {{ .Values.sensor.workflow.generateName }}
+#               spec:
+#                 workflowTemplateRef:
+#                   name: {{ .Values.sensor.workflow.template }}
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: {{ .Values.sensor.name }}
+  name: minio
 spec:
   dependencies:
-  {{- range .Values.sensor.dependencies }}
-    - name: {{ .name }}
-      eventSourceName: {{ .eventSourceName }}
-      eventName: {{ .eventName }}
-  {{- end }}
+    - name: test-dep
+      eventSourceName: minio
+      eventName: example
   triggers:
     - template:
         name: {{ .Values.sensor.templateName }}
