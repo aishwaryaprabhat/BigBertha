@@ -14,7 +14,7 @@ spec:
         - values.yaml
       parameters:
         - name: environment.HUGGINGFACEHUB_API_TOKEN
-          value: didyoureallythinkiwouldputarealtokenhere
+          value: placeholder
         - name: image.tag
           value: v1.7
         - name: replicas
