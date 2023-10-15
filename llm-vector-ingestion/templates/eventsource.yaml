@@ -3,6 +3,11 @@ kind: EventSource
 metadata:
   name: {{ .Values.minio.eventSourceName }}
 spec:
+  template:
+    container:
+      env:
+        - name: DEBUG_LOG
+          value: "true"
   minio:
     {{ .Values.minio.eventName }}:
       # bucket information

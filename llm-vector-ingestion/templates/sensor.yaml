@@ -3,6 +3,11 @@ kind: Sensor
 metadata:
   name: {{ .Values.sensor.name }}
 spec:
+  template:
+    container:
+      env:
+        - name: DEBUG_LOG
+          value: "true"
   dependencies:
   {{- range .Values.sensor.dependencies }}
     - name: {{ .name }}
