@@ -3,7 +3,7 @@ minio:
   eventSourceName: file-upload
   eventName: file-upload
   bucket: ingestion
-  endpoint: http://milvus-minio.milvus.svc
+  endpoint: http://milvus-minio.milvus.svc:9001
   events:
     - s3:ObjectCreated:Put
     - s3:ObjectRemoved:Delete
