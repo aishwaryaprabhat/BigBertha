@@ -14,7 +14,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: default  # Replace with the correct service account name
-  namespace: {{ .Values.eventbus.sanamespace }}
+  namespace: {{ .Values.eventbus.namespace }}
 roleRef:
   kind: Role
   name: create-workflows-role
