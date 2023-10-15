@@ -25,9 +25,11 @@ spec:
         key: {{ .Values.minio.accessKey.key }}
         # Name of the K8s secret that contains the access key
         name: {{ .Values.minio.secretName}}
+        namespace: {{ .Values.eventbus.namespace }}
       # secretKey contains information about K8s secret that stores the secret key
       secretKey:
         # Key within the K8s secret whose corresponding value (must be base64 encoded) is secret key
         key: {{ .Values.minio.secretKey.key }}
         # Name of the K8s secret that contains the secret key
         name: {{ .Values.minio.secretName }}
+        namespace: {{ .Values.eventbus.namespace }}
