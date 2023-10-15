@@ -25,8 +25,8 @@ sensor:
   templateName: vector-ingestion-workflow
   dependencies:
     - name: file-upload-triggered
-      eventSourceName: file-upload
-      eventName: file-upload
+      eventSourceName: fileUpload
+      eventName: fileUpload
   workflow:
     generateName: vector-ingestion-pipeline-
     template: vector-ingestion-pipeline
