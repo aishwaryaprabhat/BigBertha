@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: create-workflows-role
+rules:
+- apiGroups: ["argoproj.io"]
+  resources: ["workflows", "workflowtemplates"]
+  verbs: ["create", "get", "list", "watch", "update", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: create-workflows-binding
+subjects:
+- kind: ServiceAccount
+  name: default  # Replace with the correct service account name
+  namespace: {{ .Values.eventbus.sanamespace }}
+roleRef:
+  kind: Role
+  name: create-workflows-role
+  apiGroup: rbac.authorization.k8s.io

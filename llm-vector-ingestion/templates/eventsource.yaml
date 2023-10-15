@@ -1,65 +1,33 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: EventSource
-# metadata:
-#   name: {{ .Values.minio.eventSourceName }}
-# spec:
-#   minio:
-#     example:
-#       # bucket information
-#       bucket:
-#         # name of the bucket
-#         name: {{ .Values.minio.bucket }}
-#       # s3 service endpoint
-#       endpoint: {{ .Values.minio.endpoint }}
-#       # list of events to subscribe to
-#       # Visit https://docs.minio.io/docs/minio-bucket-notification-guide.html
-#       events:
-#         {{- range .Values.minio.events }}
-#         - {{ . }}
-#         {{- end }}
-#       # type of the connection
-#       insecure: {{ .Values.minio.insecure }}
-#       # accessKey refers to K8s secret that stores the access key
-#       accessKey:
-#         # Key within the K8s secret whose corresponding value (must be base64 encoded) is access key
-#         key: {{ .Values.minio.accessKey.key }}
-#         # Name of the K8s secret that contains the access key
-#         name: {{ .Values.minio.secretName}}
-#       # secretKey contains information about K8s secret that stores the secret key
-#       secretKey:
-#         # Key within the K8s secret whose corresponding value (must be base64 encoded) is secret key
-#         key: {{ .Values.minio.secretKey.key }}
-#         # Name of the K8s secret that contains the secret key
-#         name: {{ .Values.minio.secretName }}
 apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 metadata:
-  name: minio
+  name: {{ .Values.minio.eventSourceName }}
 spec:
   minio:
     example:
       # bucket information
       bucket:
         # name of the bucket
-        name: ingestion
+        name: {{ .Values.minio.bucket }}
       # s3 service endpoint
-      endpoint: http://milvus-minio.milvus.svc:9001
+      endpoint: {{ .Values.minio.endpoint }}
       # list of events to subscribe to
       # Visit https://docs.minio.io/docs/minio-bucket-notification-guide.html
       events:
-        - s3:ObjectCreated:Put
-        - s3:ObjectRemoved:Delete
+        {{- range .Values.minio.events }}
+        - {{ . }}
+        {{- end }}
       # type of the connection
-      insecure: true
+      insecure: {{ .Values.minio.insecure }}
       # accessKey refers to K8s secret that stores the access key
       accessKey:
         # Key within the K8s secret whose corresponding value (must be base64 encoded) is access key
-        key: accesskey
+        key: {{ .Values.minio.accessKey.key }}
         # Name of the K8s secret that contains the access key
-        name: minio-secret
+        name: {{ .Values.minio.secretName}}
       # secretKey contains information about K8s secret that stores the secret key
       secretKey:
         # Key within the K8s secret whose corresponding value (must be base64 encoded) is secret key
-        key: secretkey
+        key: {{ .Values.minio.secretKey.key }}
         # Name of the K8s secret that contains the secret key
-        name: minio-secret
+        name: {{ .Values.minio.secretName }}
