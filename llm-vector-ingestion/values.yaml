@@ -1,0 +1,29 @@
+minio:
+  secretName: minio-secret
+  eventSourceName: file-upload
+  eventName: file-upload
+  bucket: ingestion
+  endpoint: minio-service.argo-events:9000
+  events:
+    - s3:ObjectCreated:Put
+    - s3:ObjectRemoved:Delete
+  insecure: true
+  accessKey:
+    key: accesskey
+    name: artifacts-minio
+    value: placeholder
+  secretKey:
+    key: secretkey
+    name: artifacts-minio
+    value: placeholder
+
+sensor:
+  name: vector-ingestion-sensor
+  templateName: vector-ingestion-workflow
+  dependencies:
+    - name: file-upload-triggered
+      eventSourceName: file-upload
+      eventName: file-upload
+  workflow:
+    generateName: vector-ingestion-pipeline-
+    template: vector-ingestion-pipeline

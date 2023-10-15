@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: vector-ingestion-pipeline
+spec:
+  entrypoint: vector-ingestion-pipeline
+  templates:
+    - name: vector-ingestion-pipeline
+      dag:
+        tasks:
+          - name: load-document
+            template: load-document
+          - name: create-vectors
+            template: create-vectors
+            dependencies: [load-document]
+          - name: ingest-vectors
+            template: ingest-vectors
+            dependencies: [create-vectors]
+
+    - name: load-document
+      container:
+        image: busybox
+        command: ["echo", "Step A: Load Document"]
+
+    - name: create-vectors
+      container:
+        image: busybox
+        command: ["echo", "Step B: Create Vectors"]
+
+    - name: ingest-vectors
+      container:
+        image: busybox
+        command: ["echo", "Step C: Ingest vectors into Vector DB"]

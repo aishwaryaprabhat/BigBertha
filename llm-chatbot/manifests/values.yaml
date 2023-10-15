@@ -40,7 +40,6 @@ eventsource:
 
 sensor:
   name: retraining-sensor
-  namespace: argo-events
   dependencies:
     - name: retraining-webhook-triggered
       eventSourceName: retraining-webhook

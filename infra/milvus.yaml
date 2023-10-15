@@ -17,11 +17,11 @@ spec:
         - values.yaml
       parameters:
         - name: cluster.enabled
-          value: "false"
+          value: 'false'
         - name: minio.mode
           value: standalone
         - name: pulsar.enabled
-          value: "false"
+          value: 'false'
         - name: log.persistence.persistentVolumeClaim.size
           value: 1Gi
         - name: standalone.persistence.persistentVolumeClaim.size
@@ -41,13 +41,17 @@ spec:
         - name: mysql.secondary.persistence.size
           value: 2Gi
         - name: etcd.replicaCount
-          value: "1"
+          value: '1'
         - name: kafka.replicaCount
-          value: "1"
+          value: '1'
         - name: pulsar.bookkeeper.replicaCount
-          value: "1"
+          value: '1'
         - name: etcd.replicaCount
-          value: "1"
+          value: '1'
+        - name: attu.service.type
+          value: ClusterIP
+        - name: proxy.service.type
+          value: ClusterIP
 
         
   sources: []
