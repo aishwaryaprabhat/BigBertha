@@ -1,7 +1,7 @@
 minio:
   secretName: minio-secret
-  eventSourceName: file-upload
-  eventName: file-upload
+  eventSourceName: fileupload
+  eventName: fileupload
   bucket: ingestion
   endpoint: http://milvus-minio.milvus.svc:9001
   events:
@@ -24,9 +24,9 @@ sensor:
   name: vector-ingestion-sensor
   templateName: vector-ingestion-workflow
   dependencies:
-    - name: file-upload-triggered
-      eventSourceName: file-upload
-      eventName: file-upload
+    - name: fileupload-triggered
+      eventSourceName: fileupload
+      eventName: fileupload
   workflow:
     generateName: vector-ingestion-pipeline-
     template: vector-ingestion-pipeline
