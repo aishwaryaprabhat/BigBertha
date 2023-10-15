@@ -2,7 +2,7 @@ chatbotapp:
   namespace: bigbertha
   image:
     repository: aishwaryaprabhat/chatbot
-    tag: v1.6
+    tag: v1.7
   replicas: 1
   service:
     metricsport: 5000
