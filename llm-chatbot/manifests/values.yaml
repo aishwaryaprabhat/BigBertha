@@ -58,7 +58,7 @@ alertmanagerconfig:
 prometheusrule:
   name: thumbs-down-count-rule
   alertName: thumbs_down_count_exceeded
-  alertExpression: thumbs_down_count > 2
+  alertExpression: thumbs_down_count > thumbs_up_count
   alertFor: 5s
   alertSummary: Model retraining required
   alertDescription: Model retraining required
