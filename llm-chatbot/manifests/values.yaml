@@ -59,7 +59,7 @@ prometheusrule:
   name: thumbs-down-count-rule
   alertName: thumbs_down_count_exceeded
   alertExpression: thumbs_down_count > thumbs_up_count
-  alertFor: 5s
+  alertFor: 60s
   alertSummary: Model retraining required
   alertDescription: Model retraining required
 
