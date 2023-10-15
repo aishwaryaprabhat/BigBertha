@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: milvus
+spec:
+  destination:
+    name: ''
+    namespace: milvus
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ''
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 3.1.7
+    chart: milvus
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: cluster.enabled
+          value: "false"
+        - name: minio.mode
+          value: standalone
+        - name: pulsar.enabled
+          value: "false"
+        - name: log.persistence.persistentVolumeClaim.size
+          value: 1Gi
+        - name: standalone.persistence.persistentVolumeClaim.size
+          value: 10Gi
+        - name: minio.persistence.size
+          value: 10Gi
+        - name: pulsar.bookkeeper.volumes.journal.size
+          value: 2Gi
+        - name: pulsar.bookkeeper.volumes.ledgers.size
+          value: 2Gi
+        - name: kafka.persistence.size
+          value: 5Gi
+        - name: etcd.persistence.size
+          value: 5Gi
+        - name: mysql.primary.persistence.size
+          value: 2GiC
+        - name: mysql.secondary.persistence.size
+          value: 2Gi
+        - name: etcd.replicaCount
+          value: "1"
+        - name: kafka.replicaCount
+          value: "1"
+        - name: pulsar.bookkeeper.replicaCount
+          value: "1"
+        - name: etcd.replicaCount
+          value: "1"
+
+        
+  sources: []
+  project: default
+  syncPolicy:
+    automated: null
+    syncOptions:
+      - CreateNamespace=true
