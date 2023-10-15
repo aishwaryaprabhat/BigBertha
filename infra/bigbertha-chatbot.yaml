@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/aishwaryaprabhat/BigBertha'
-    path: llmchatbot/manifests
+    path: llm-chatbot/manifests
     targetRevision: HEAD
     helm:
       valueFiles:
@@ -16,7 +16,7 @@ spec:
         - name: environment.HUGGINGFACEHUB_API_TOKEN
           value: didyoureallythinkiwouldputarealtokenhere
         - name: image.tag
-          value: v1.5
+          value: v1.7
         - name: replicas
           value: '1'
         - name: resources.memoryLimit
