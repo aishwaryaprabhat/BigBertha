@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.minio.eventSourceName }}
 spec:
   minio:
-    example:
+    {{ .Values.minio.eventName }}:
       # bucket information
       bucket:
         # name of the bucket
