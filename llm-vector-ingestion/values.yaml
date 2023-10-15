@@ -17,6 +17,9 @@ minio:
     name: minio-secret
     value: placeholder
 
+eventbus:
+  namespace: vector-ingestion
+
 sensor:
   name: vector-ingestion-sensor
   templateName: vector-ingestion-workflow
