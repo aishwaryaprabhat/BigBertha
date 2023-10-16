@@ -33,4 +33,4 @@ sensor:
 
 milvus:
   host: milvus-proxy.milvus.svc
-  port: 19530
+  port: "19530"
