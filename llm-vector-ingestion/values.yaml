@@ -30,3 +30,7 @@ sensor:
   workflow:
     generateName: vector-ingestion-pipeline-
     template: vector-ingestion-pipeline
+
+milvus:
+  host: milvus-proxy.milvus.svc
+  port: 19530

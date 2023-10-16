@@ -51,7 +51,7 @@ sensor:
 alertmanagerconfig:
   name: retraining-alertmanager-config
   receiverName: webhook-receiver
-  receiverURL: http://retraining-webhook-eventsource-svc.bigbertha.svc/retraining
+  receiverURL: http://retraining-webhook-eventsource-svc.bigbertha.svc:12000/retraining
   routeMatchAlertname: thumbs_down_count_exceeded
 
 prometheusrule:

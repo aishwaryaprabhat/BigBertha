@@ -31,4 +31,4 @@ sudo sh -c "containerd config default > /etc/containerd/config.toml"
 sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/config.toml
 sudo systemctl restart containerd.service
 sudo systemctl restart kubelet.service
-kubeadm join 128.199.194.232:6443 --token
+# kubeadm join 128.199.194.232:6443 --token

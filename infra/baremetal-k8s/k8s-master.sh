@@ -44,4 +44,4 @@ curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/cu
 sed -i 's/cidr: 192\.168\.0\.0\/16/cidr: 10.10.0.0\/16/g' custom-resources.yaml
 kubectl create -f custom-resources.yaml
 
-kubeadm create token &lt;TOKEN> --discovery-token-ca-cert-hash &lt;CERTIFICATE_HASH>
+kubeadm token create --print-join-command

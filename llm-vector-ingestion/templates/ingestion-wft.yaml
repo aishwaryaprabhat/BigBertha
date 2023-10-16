@@ -29,5 +29,11 @@ spec:
 
     - name: ingest-vectors
       container:
-        image: busybox
+        image: aishwaryaprabhat/llm-vector-ingestion:v1
         command: ["echo", "Step C: Ingest vectors into Vector DB"]
+        env:
+          - name: MILVUS_HOST
+            value: {{ .Values.milvus.host }}
+          - name: MILVUS_PORT
+            value: {{ .Values.milvus.port }}
+
