@@ -1,4 +1,4 @@
-# BigBertha: A Kubernete-native LLMOps Architecture Design
+# BigBertha: A Kubernetes native LLMOps Architecture Design
 ![BigBertha](assets/bigbertha.png)
 
 BigBertha is a Kubernetes-native LLMOps architecture design 🌟
