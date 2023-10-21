@@ -14,8 +14,5 @@ kubectl -n argocd port-forward svc/argocd-server 8080:80 &
 kubectl -n argowf port-forward svc/argowf-argo-workflows-server 2746 &
 kubectl -n prometheus port-forward svc/kube-prometheus-stack-alertmanager  9093 &
 kubectl -n bigbertha port-forward svc/llmchatbot 8501 5000 &
-kubectl -n milvus port-forward svc/milvus-minio 9001
-kubectl -n milvus port-forward svc/milvus-attu 8081:80
-
-# Wait for all port forwarding processes to finish before exiting
-wait
+kubectl -n milvus port-forward svc/milvus-minio 9001 &
+kubectl -n milvus port-forward svc/milvus-attu 8081:80 &
