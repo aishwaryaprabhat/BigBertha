@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/aishwaryaprabhat/BigBertha'
-    path: llm-chatbot/manifests
+    path: llmops/manifests
     targetRevision: HEAD
     helm:
       valueFiles:
