@@ -23,7 +23,7 @@ curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --de
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
 sudo apt install -y kubelet kubeadm kubectl
-sudo apt install docker.io
+sudo apt install -y docker.io
 
 mkdir -p /etc/containerd
 sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/config.toml
@@ -45,3 +45,15 @@ sed -i 's/cidr: 192\.168\.0\.0\/16/cidr: 10.10.0.0\/16/g' custom-resources.yaml
 kubectl create -f custom-resources.yaml
 
 kubeadm token create --print-join-command
+
+kubectl taint nodes <node-name> node-role.kubernetes.io/control-plane:NoSchedule-
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+if kubectl > /dev/null 2>&1; then
+  source <(kubectl completion bash)
+fi
+source ~/.bashrc
