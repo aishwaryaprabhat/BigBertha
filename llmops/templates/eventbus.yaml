@@ -5,7 +5,7 @@ metadata:
 spec:
   jetstream:
     version: latest # Do NOT use "latest" but a specific version in your real deployment
-    replicas: 3
+    replicas: 1
     persistence: # optional
         storageClassName: local-storage
         accessMode: ReadWriteOnce
