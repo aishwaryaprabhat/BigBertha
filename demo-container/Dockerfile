@@ -27,7 +27,7 @@ RUN pip3 install -r requirements.txt
 # Copy the necessary files into the container
 COPY chatbot chatbot
 COPY entrypoint.sh .
-COPY requirements.txt .
+COPY vector_ingestion.py .
 
 # Set necessary permissions and user
 RUN chmod +x entrypoint.sh

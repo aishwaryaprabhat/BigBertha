@@ -18,7 +18,7 @@ minio:
     value: placeholder
 
 eventbus:
-  namespace: ingestion
+  namespace: vector-ingestion
 
 sensor:
   name: vector-ingestion-sensor
@@ -33,4 +33,4 @@ sensor:
 
 milvus:
   host: milvus-proxy.milvus.svc
-  port: 19530
+  port: "19530"

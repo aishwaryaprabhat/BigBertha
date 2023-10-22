@@ -21,7 +21,7 @@ spec:
           value: milvus-minio.milvus.svc
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: ingestion
+    namespace: vector-ingestion
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
