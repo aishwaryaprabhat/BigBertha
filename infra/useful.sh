@@ -1,7 +1,7 @@
 #!/bin/bash
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
-kubectl -n argowf exec -it argowf-argo-workflows-server-7d4d4b57c9-chbm2 argo auth token
+kubectl -n argowf exec -it argowf-argo-workflows-server-cc64696d5-dlj8m argo auth token
 
 # Kill prior services running on the ports
 for port in 9090 8080 9093 8501 5000 2746; do
