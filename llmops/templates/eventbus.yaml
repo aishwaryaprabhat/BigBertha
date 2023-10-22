@@ -3,16 +3,9 @@ kind: EventBus
 metadata:
   name: default
 spec:
-  jetstream:
-    version: latest # Do NOT use "latest" but a specific version in your real deployment
-    replicas: 1
-    persistence: # optional
-        storageClassName: local-storage
-        accessMode: ReadWriteOnce
-        volumeSize: 2Gi
-    streamConfig: |             # see default values in argo-events-controller-config
-      maxAge: 24h
-    settings: |
-      max_file_store: 1GB       # see default values in argo-events-controller-config
-    startArgs:
-      - "-D"                    # debug-level logs
+  nats:
+    native:
+      # Optional, defaults to 3. If it is < 3, set it to 3, that is the minimal requirement.
+      replicas: 2
+      # Optional, authen strategy, "none" or "token", defaults to "none"
+      auth: token
