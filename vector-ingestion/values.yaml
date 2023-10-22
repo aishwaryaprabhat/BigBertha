@@ -18,7 +18,7 @@ minio:
     value: placeholder
 
 eventbus:
-  namespace: vector-ingestion
+  namespace: ingestion
 
 sensor:
   name: vector-ingestion-sensor
