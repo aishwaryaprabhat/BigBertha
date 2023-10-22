@@ -26,7 +26,6 @@ sudo apt install -y kubelet kubeadm kubectl
 sudo apt install -y docker.io
 
 mkdir -p /etc/containerd
-sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/config.toml
 sudo sh -c "containerd config default > /etc/containerd/config.toml"
 sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/config.toml
 sudo systemctl restart containerd.service
