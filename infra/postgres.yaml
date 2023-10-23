@@ -21,10 +21,16 @@ spec:
           value: 'true'
         - name: volumePermissions.enabled
           value: 'true'
+        - name: auth.password
+          value: password
+        - name: auth.postgresPassword
+          value: password
+        - name: auth.replicationPassword
+          value: password
     chart: postgresql
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: postgres
+    namespace: postgresql
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
