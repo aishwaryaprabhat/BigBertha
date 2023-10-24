@@ -4,6 +4,8 @@ metadata:
   name: vector-ingestion-pipeline
 spec:
   entrypoint: vector-ingestion-pipeline
+  ttlStrategy:
+    secondsAfterCompletion: 7200  # Set TTL to 2 hours (2 hours * 3600 seconds/hour)
   templates:
     - name: vector-ingestion-pipeline
       dag:
@@ -34,6 +36,3 @@ spec:
         env:
           - name: MILVUS_HOST
             value: {{ .Values.milvus.host }}
-          # - name: MILVUS_PORT
-          #   value: {{ .Values.milvus.port }}
-
