@@ -36,3 +36,5 @@ spec:
         env:
           - name: MILVUS_HOST
             value: {{ .Values.milvus.host }}
+          - name: MILVUS_PORT
+            value: '{{ .Values.milvus.host }}'
