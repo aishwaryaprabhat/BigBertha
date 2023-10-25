@@ -22,17 +22,14 @@ ENV DOWNLOAD_LATER=false
 
 # Install required Python packages
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
 
 # Copy the necessary files into the container
 COPY chatbot chatbot
-COPY entrypoint.sh .
-COPY vector_ingestion.py .
+COPY ingestion ingestion
 
 # Set necessary permissions and user
-RUN chmod +x entrypoint.sh
+# RUN chmod +x entrypoint.sh
 RUN chmod -R 777 /home
 USER llamauser
 
-# Run the entrypoint script only if HUGGINGFACEHUB_API_TOKEN is available
-CMD ["./entrypoint.sh"]
+CMD ["chatbot/entrypoint.sh"]

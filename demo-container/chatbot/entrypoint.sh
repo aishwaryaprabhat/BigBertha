@@ -1,5 +1,7 @@
 #!/bin/sh
 
+pip3 install -r requirements.txt --no-warn-script-location
+
 # Check if HUGGINGFACEHUB_API_TOKEN is set
 if [ -z "$HUGGINGFACEHUB_API_TOKEN" ]; then
   echo "HUGGINGFACEHUB_API_TOKEN is not set. Exiting..."

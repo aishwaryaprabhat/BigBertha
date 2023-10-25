@@ -11,7 +11,7 @@ import os
 
 print("Connecting to milvus...")
 
-HOST = os.environ.get('MILVUS_HOST', '10.99.228.212')
+HOST = os.environ.get('MILVUS_HOST', "10.97.151.193")
 PORT = os.environ.get('MILVUS_PORT', "19530")
 
 connections.connect("default", host=HOST, port=PORT)

@@ -25,9 +25,9 @@ spec:
         - name: log.persistence.persistentVolumeClaim.size
           value: 1Gi
         - name: standalone.persistence.persistentVolumeClaim.size
-          value: 10Gi
+          value: 5Gi
         - name: minio.persistence.size
-          value: 10Gi
+          value: 5Gi
         - name: pulsar.bookkeeper.volumes.journal.size
           value: 2Gi
         - name: pulsar.bookkeeper.volumes.ledgers.size
@@ -47,7 +47,7 @@ spec:
         - name: pulsar.bookkeeper.replicaCount
           value: '1'
         - name: etcd.replicaCount
-          value: '3'
+          value: '2'
         - name: attu.service.type
           value: ClusterIP
         - name: proxy.service.type
