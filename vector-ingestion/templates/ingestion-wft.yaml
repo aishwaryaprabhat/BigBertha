@@ -32,7 +32,7 @@ spec:
     - name: ingest-vectors
       container:
         image: {{ .Values.Workflow.image }}
-        command: ["python3", "vector_ingestion.py"]
+        command: ["bash", "ingestion/entrypoint.sh"]
         env:
           - name: MILVUS_HOST
             value: {{ .Values.milvus.host }}
