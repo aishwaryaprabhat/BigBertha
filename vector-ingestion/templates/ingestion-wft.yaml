@@ -31,7 +31,7 @@ spec:
 
     - name: ingest-vectors
       container:
-        image: aishwaryaprabhat/llm-vector-ingestion:v1
+        image: {{ .Values.Workflow.image }}
         command: ["python3", "vector_ingestion.py"]
         env:
           - name: MILVUS_HOST
