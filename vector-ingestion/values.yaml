@@ -34,3 +34,6 @@ sensor:
 milvus:
   host: milvus-proxy.milvus.svc
   port: "19530"
+
+Workflow:
+  image: aishwaryaprabhat/bigbertha-demo:v1
