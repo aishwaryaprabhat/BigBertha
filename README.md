@@ -1,65 +1,61 @@
 # BigBertha: A Kubernetes native LLMOps Architecture Design
 ![BigBertha](assets/bigbertha.png)
 
-BigBertha is a Kubernetes-native LLMOps architecture design 🌟
+BigBertha is an architecture design that demonstrates how automated LLMOps (Large Language Models Operations) can be achieved on any Kubernetes cluster using open source container-native technologies 🌟
 
 ## Architecture
-![Architecture](assets/archi.png)
+![Architecture](assets/archinew.png)
 
-## 🤖 Demo Chatbot
-- For the demo chatbot, a StreamLit based app is used.
-- LLama2 powers the core of the LLM.
-- 📈 Since StreamLit does not provide a /metrics endpoint natively, model performance metrics are stored in Redis.
-- A Flask app, 🌐 exposed via `/metrics`, makes the metrics scrape-able by Prometheus.
-- The demo chatbot adopts the RAG methodology (Retrieval-Augmented Generation) for enhanced language processing.
-- LLamaIndex comes into play for seamless querying of vectors from Milvus.
-- The deployment leverages Kubernetes Deployment objects with a ClusterIP. 🐳
+## LLMOps Capabilities 🚀
 
-## 📡 LLM Performance Monitoring using Prometheus
+### 1. LLM Monitoring
 
-- Prometheus is used for monitoring the LLM performance metrics.
-- Correctly configured ServiceMonitors, PrometheusRules, and AlertManagerConfig CRDs make sure every metric is scraped and analyzed. 🧐
+👀 BigBertha utilizes Prometheus to monitor LLM (Large Language Model) serving modules. For demo purposes, a Streamlit app is used to serve the LLM, and Prometheus scrapes metrics from it. Alerts are set up to detect performance degradation.
 
-## ⚙️ Automated LLM Retraining and Fine-tuning
+### 2. Auto-triggering LLM Retraining/Fine-tuning
 
-- Depending on alerting rules configured, the Alert Manager steps in.
-- An Argo Events Webhook EventSource comes into play.
-- This EventSource triggers a Sensor.
-- The Sensor, in turn, kicks off an ArgoWorkflow.
-- This workflow is a whirlwind, fine-tuning and retraining the LLM.
-- Benchmarking happens, and performance results are logged to MLFlow.
-- The model itself finds its place in MLFlow's hall of fame. 🏆
+⚙️ Prometheus triggers alerts when the model performance degrades. These alerts are managed by AlertManager, which uses Argo Events to trigger a retraining pipeline to fine-tune the model.
 
-## 📥 Automated Vector Ingestion
+### 3. Training, Evaluating, and Logging the Retrained LLM
 
-- An Argo Events EventSource of type minio listens for MinIO events like file uploads.
-- When a file lands in MinIO, an Argo Events Sensor swoops in.
-- The Sensor triggers an ArgoWorkflow.
-- This workflow loads the freshly ingested data, works its magic to convert it into vectors, and finally, 🚀 pushes these vectors to Milvus for efficient querying.
+🏋️ The retraining pipeline is orchestrated using Argo Workflows. This pipeline can be tailored to perform LLM-specific retraining, fine-tuning, and metrics tracking. MLflow is used for logging the retrained LLM.
 
-## 🗄️ Data Storage with MinIO
+### 4. Triggering the Generation of New Vectors for Fresh Data
 
-- MinIO takes on the role of a robust data storage layer, ensuring data reliability. 💾
+🔄 MinIO is used for unstructured data storage. Argo Events is set up to listen for upload events on MinIO, triggering a vector ingestion workflow when new data is uploaded.
 
-## Technologies Used 🛠️
+### 5. Ingesting New Vectors into the Knowledge Base
 
-BigBertha integrates several technologies to create a powerful and versatile LLM deployment and operations architecture:
+🔍 Argo Workflows is used to run a vector ingestion pipeline that utilizes LlamaIndex for generating and ingesting vectors. These vectors are stored in Milvus, which serves as the knowledge base for retrieval-augmented generation.
 
-- **Kubernetes**: Container orchestration 🐋
+## Stack Overview
 
-- **ArgoCD**: ArgoCD is used for GitOps-based deployments and for managing the state of the components.
+BigBertha relies on several key components:
 
-- **LLamaIndex**: Used for querying vectors from Milvus.
+- **ArgoCD:** A Kubernetes-native continuous delivery tool that manages all components in the BigBertha stack.
 
-- **Milvus**: A vector database for efficient data retrieval.
+- **Argo Workflows:** A Kubernetes-native workflow engine used for running vector ingestion and model retraining pipelines.
 
-- **Prometheus**: Employed for model monitoring with correctly configured ServiceMonitors, PrometheusRules, and AlertManagerConfig CRDs.
+- **Argo Events:** A Kubernetes-native event-based dependency manager that connects various applications and components, triggering workflows based on events.
 
-- **Argo Events**: Handles event-driven automation, including triggering workflows.
+- **Prometheus + AlertManager:** Used for monitoring and alerting related to model performance.
 
-- **Argo Workflows**: Manages the orchestration of LLM fine-tuning, retraining, and vector ingestion.
+- **LlamaIndex:** A framework for connecting LLMs and data sources, used for data ingestion and indexing.
 
-- **MinIO**: Serves as the data storage layer for the architecture. 📦
+- **Milvus:** A Kubernetes-native vector database for storing and querying vectors.
+
+- **MinIO:** An open-source object storage system used for storing unstructured data.
+
+- **MLflow:** An open-source platform for managing the machine learning lifecycle, including experiment tracking and model management.
+
+- **Kubernetes:** The container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+
+- **Docker Containers:** Docker containers are used for packaging and running applications in a consistent and reproducible manner.
+
+## Demo Chatbot
+
+As a demonstration, BigBertha includes a Streamlit-based chatbot that serves a Llama2 7B quantized chatbot model. A simple Flask app is used to expose metrics, and Redis acts as an intermediary between Streamlit and Flask processes.
+
 
 ## License 📄
 
