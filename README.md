@@ -4,7 +4,7 @@
 BigBertha is a Kubernetes-native LLMOps architecture design 🌟
 
 ## Architecture
-![Architecture](assets/archi.png)
+![Architecture](assets/archinew.png)
 
 ## 🤖 Demo Chatbot
 - For the demo chatbot, a StreamLit based app is used.
