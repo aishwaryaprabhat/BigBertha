@@ -21,15 +21,18 @@ spec:
           - name: log-model-metrics
             template: model-metrics-logging-mlflow
             dependencies: [benchmark-model-gold, benchmark-model-specific]
-          - name: evaluate-model-quality
+          - name: hallucination-evaluation
+            template: model-quality-evaluation
+            dependencies: [log-model-metrics]
+          - name: factcheck-evaluation
+            template: model-quality-evaluation
+            dependencies: [log-model-metrics]
+          - name: subject-matter-evaluation
             template: model-quality-evaluation
             dependencies: [log-model-metrics]
           - name: log-model
             template: model-logging-mlflow
-            dependencies: [log-model-metrics]
-          - name: deploy-model
-            template: model-deployment
-            dependencies: [log-model, evaluate-model-quality]
+            dependencies: [factcheck-evaluation, hallucination-evaluation, subject-matter-evaluation]
 
     - name: model-retraining
       container:
