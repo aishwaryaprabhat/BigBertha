@@ -4,7 +4,7 @@
 BigBertha is an architecture design that demonstrates how automated LLMOps (Large Language Models Operations) can be achieved on any Kubernetes cluster using open source container-native technologies 🌟
 
 ## Architecture
-![Architecture](assets/BB.gif)
+![Architecture](assets/archi.gif)
 
 ## LLMOps Capabilities 🚀
 
